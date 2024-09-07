@@ -9,20 +9,18 @@ let city = document.querySelector("#city");
 let humidity = document.querySelector("#humidity");
 let wind = document.querySelector("#wind");
 
-
 window.addEventListener("DOMContentLoaded", () => {
     document.querySelector(".weather").style.display = "none";
 })
-
 
 const checkWeather = async (toFind) => {
     const response = await fetch(apiURL + `${toFind}` + `&appid=${apiKey}`);
     
     if (response.status == "404") {
         console.log("error");
+        document.querySelector(".main-heading").style.display = "block";
         document.querySelector(".weather").style.display = "none";
         document.querySelector(".error-msg").style.display = "block";
-
     }
     else {
         const data = await response.json();
@@ -35,11 +33,10 @@ const checkWeather = async (toFind) => {
         wind.innerHTML = data.wind.speed + "km/h";
         input.value = "";
 
+        document.querySelector(".main-heading").style.display = "none";
         document.querySelector(".weather").style.display = "block";
         document.querySelector(".error-msg").style.display = "none";
     }
-
-
 }
 
 btn.addEventListener("click", () => {
